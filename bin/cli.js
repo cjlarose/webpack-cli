@@ -489,9 +489,12 @@ For more information, see https://webpack.js.org/api/cli/.`);
 					process.exit(1); // eslint-disable-line
 				}
 				if (outputOptions.json) {
-					stdout.write(
-						JSON.stringify(stats.toJson(outputOptions), null, 2) + "\n"
-					);
+					const largeObject = stats.toJson(outputOptions);
+					const json = require("big-json");
+					const stringifyStream = json.createStringifyStream({
+						body: largeObject,
+					});
+					stringifyStream.pipe(process.stdout);
 				} else if (stats.hash !== lastHash) {
 					lastHash = stats.hash;
 					if (stats.compilation && stats.compilation.errors.length !== 0) {

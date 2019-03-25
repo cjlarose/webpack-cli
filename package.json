@@ -103,6 +103,7 @@
     }
   },
   "dependencies": {
+    "big-json": "^2.0.2",
     "chalk": "^2.4.1",
     "cross-spawn": "^6.0.5",
     "enhanced-resolve": "^4.1.0",
